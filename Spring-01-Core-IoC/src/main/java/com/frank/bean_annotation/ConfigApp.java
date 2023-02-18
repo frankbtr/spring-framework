@@ -1,6 +1,7 @@
 package com.frank.bean_annotation;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 
 @org.springframework.context.annotation.Configuration
 public class ConfigApp {
@@ -10,8 +11,14 @@ public class ConfigApp {
         return new FullTimeMentor();
     }
 
-    @Bean
+    @Bean//(name = "p1")
+    @Primary
     PartTimeMentor partTimeMentor(){
+        return new PartTimeMentor();
+    }
+
+    @Bean//(name = "p2")
+    PartTimeMentor partTimeMentor2(){
         return new PartTimeMentor();
     }
 }
