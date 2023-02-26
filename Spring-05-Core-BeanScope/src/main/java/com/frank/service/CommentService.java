@@ -5,9 +5,13 @@ import com.frank.proxy.CommentNotificationProxy;
 import com.frank.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+//@Scope("prototype") //whenever someone asks create a bean, please create new one
+@Scope(BeanDefinition.SCOPE_PROTOTYPE) // this one is also do the same one!
 public class CommentService {
     private final CommentRepository commentRepository;
     private final CommentNotificationProxy commentNotificationProxy;
