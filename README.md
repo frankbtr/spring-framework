@@ -1,2 +1,2 @@
 # spring-framework
-# Self study and implementation of Spring Framework
+# Self study and practice of Spring Framework
