@@ -1,5 +1,6 @@
 package com.frank.controller;
 
+import com.frank.model.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,9 @@ public class StudentController {
         number.add(2);
         number.add(5100);
         model.addAttribute("number", number);
+
+        Student student = new Student(1, "Frank", "Batur");
+        model.addAttribute("student", student);
 
         return "student/welcome";
     }
