@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+<h2>Welcome new students!</h2>
+
+<!-- Displaying value-->
+<h2 th:text="${students.get(0).getFirstName()}"></h2>
+<h2 th:text="${students.get(0).getLastName()}"></h2>
+
+<!-- Concatenation-->
+<h2 th:text="${'Welcome ' + students.get(0).getFirstName()}"></h2>
+
+<!-- Link -->
+<a th:href="@{https://github.com/frankbtr}">Frank Batur Github</a>
+<br>
+<a th:href="@{/student/welcome}">Welcome</a>
+
+<!-- Adding Parameters to Link -->
+<a th:href="@{/student/welcome(id=3)}">Student id 3</a>
+
+<a th:href="@{/student/welcome(id=${students.get(0).firstName})}">Student 3</a>
+
+<!--Iteration-->
+<ul>
+    <li th:each="student :${students}" th:text="${student.getFirstName()}"></li>
+</ul>
+
+</body>
+</html>
