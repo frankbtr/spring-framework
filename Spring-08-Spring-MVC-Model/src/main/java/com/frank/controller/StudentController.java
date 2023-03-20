@@ -34,11 +34,11 @@ public class StudentController {
         Student student = new Student(1, "Frank", "Batur");
         model.addAttribute("student", student);
 
-        return "student/welcome";
+        return "register";
     }
 
     @RequestMapping("/frank")
     public String homepage2(Model model){
-        return "student/welcome";
+        return "register";
     }
 }
