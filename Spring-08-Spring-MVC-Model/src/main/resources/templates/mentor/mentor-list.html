@@ -18,11 +18,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td th:text="${mentors.get(0).getFirstName()}"></td>
-        <td th:text="${mentors.get(0).getLastName()}"></td>
-        <td th:text="${mentors.get(0).getAge()}"></td>
-        <td th:text="${mentors.get(0).getGender()}"></td>
+    <tr th:each="mentor: ${mentors}">
+        <td th:text="${mentor.getFirstName()}"></td>
+        <td th:text="${mentor.getLastName()}"></td>
+        <td th:text="${mentor.age}"></td>
+        <td th:text="${mentor.gender}"></td>
     </tr>
     <tr>
         <td th:text="${mentors.get(1).getFirstName()}"></td>
