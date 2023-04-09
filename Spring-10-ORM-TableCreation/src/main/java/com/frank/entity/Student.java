@@ -1,0 +1,14 @@
+package com.frank.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Student {
+
+    @Id
+    private int studentID;
+    private String firstName;
+    private String lastName;
+    private String email;
+}
