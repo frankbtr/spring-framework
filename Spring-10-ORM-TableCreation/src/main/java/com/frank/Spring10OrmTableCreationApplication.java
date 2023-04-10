@@ -1,4 +1,4 @@
-package com.frank.spring10ormtablecreation;
+package com.frank;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
