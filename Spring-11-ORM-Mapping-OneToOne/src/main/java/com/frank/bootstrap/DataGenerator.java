@@ -2,6 +2,7 @@ package com.frank.bootstrap;
 
 import com.frank.entity.Department;
 import com.frank.entity.Employee;
+import com.frank.entity.Region;
 import com.frank.enums.Gender;
 import com.frank.repository.DepartmentRepository;
 import com.frank.repository.EmployeeRepository;
@@ -19,11 +20,11 @@ import static com.frank.enums.Gender.F;
 public class DataGenerator implements CommandLineRunner {
 
     EmployeeRepository employeeRepository;
-    DepartmentRepository departmentRepository;
+   // DepartmentRepository departmentRepository;
 
-    public DataGenerator(EmployeeRepository employeeRepository, DepartmentRepository departmentRepository) {
+    public DataGenerator(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
-        this.departmentRepository = departmentRepository;
+       // this.departmentRepository = departmentRepository;
     }
 
     @Override
@@ -42,11 +43,23 @@ public class DataGenerator implements CommandLineRunner {
         Department d2= new Department("Software", "Developers");
         Department d3= new Department("Tools", "Hardware");
 
+        Region r1 = new Region("Toronto", "Canada");
+        Region r2 = new Region("Scarborough", "Canada");
+        Region r3 = new Region("Markham", "Canada");
+
+        e1.setDepartment(d1);
+        e2.setDepartment(d2);
+        e3.setDepartment(d3);
+
+        e1.setRegion(r1);
+        e2.setRegion(r2);
+        e3.setRegion(r3);
+
         employeeList.addAll(Arrays.asList(e1, e2, e3));
         departmentList.addAll(Arrays.asList(d1, d2, d3));
 
         employeeRepository.saveAll(employeeList);
-        departmentRepository.saveAll(departmentList);
+   //     departmentRepository.saveAll(departmentList);
 
     }
 }
