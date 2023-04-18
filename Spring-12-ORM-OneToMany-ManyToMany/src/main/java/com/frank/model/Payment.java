@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="tables")
+@Table(name="payments")
 @Data
 @NoArgsConstructor
 public class Payment {
@@ -25,6 +25,9 @@ public class Payment {
 
     @OneToOne(cascade = CascadeType.ALL)
     private PaymentDetail paymentDetail;
+
+    @ManyToOne
+    private Merchant merchant;
 
     public Payment(LocalDate createDate, BigDecimal amount, Status paymentStatus) {
         this.createDate = createDate;
