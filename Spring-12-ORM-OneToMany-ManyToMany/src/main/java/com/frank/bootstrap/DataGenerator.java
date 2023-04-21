@@ -1,9 +1,11 @@
 package com.frank.bootstrap;
 
 import com.frank.enums.Status;
+import com.frank.model.Customer;
 import com.frank.model.Merchant;
 import com.frank.model.Payment;
 import com.frank.model.PaymentDetail;
+import com.frank.repository.CustomerRepository;
 import com.frank.repository.MerchantRepository;
 import com.frank.repository.PaymentRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -17,10 +19,13 @@ public class DataGenerator implements CommandLineRunner {
 
     private final PaymentRepository paymentRepository;
     private final MerchantRepository merchantRepository;
+    private final CustomerRepository customerRepository;
 
-    public DataGenerator(PaymentRepository paymentRepository, MerchantRepository merchantRepository) {
+
+    public DataGenerator(PaymentRepository paymentRepository, MerchantRepository merchantRepository, CustomerRepository customerRepository) {
         this.paymentRepository = paymentRepository;
         this.merchantRepository = merchantRepository;
+        this.customerRepository = customerRepository;
     }
 
     @Override
@@ -39,10 +44,16 @@ public class DataGenerator implements CommandLineRunner {
 
         Merchant merchant1 = new Merchant("AmazonSunMerchant", "M123", new BigDecimal(0.25), new BigDecimal(3.25), 5);
 
+        Customer customer1 = new Customer("msmith", "Mike", "Smith", "m.smith@gmail.com", "VA");
+
         payment1.setMerchant(merchant1);
         payment2.setMerchant(merchant1);
 
+        payment1.setCustomer(customer1);
+        payment2.setCustomer(customer1);
+
         merchantRepository.save(merchant1);
+        customerRepository.save(customer1);
 
         paymentRepository.save(payment1);
         paymentRepository.save(payment2);
