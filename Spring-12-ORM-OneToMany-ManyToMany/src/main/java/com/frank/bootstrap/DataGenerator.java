@@ -1,8 +1,10 @@
 package com.frank.bootstrap;
 
 import com.frank.enums.Status;
+import com.frank.model.Merchant;
 import com.frank.model.Payment;
 import com.frank.model.PaymentDetail;
+import com.frank.repository.MerchantRepository;
 import com.frank.repository.PaymentRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -14,9 +16,11 @@ import java.time.LocalDate;
 public class DataGenerator implements CommandLineRunner {
 
     private final PaymentRepository paymentRepository;
+    private final MerchantRepository merchantRepository;
 
-    public DataGenerator(PaymentRepository paymentRepository) {
+    public DataGenerator(PaymentRepository paymentRepository, MerchantRepository merchantRepository) {
         this.paymentRepository = paymentRepository;
+        this.merchantRepository = merchantRepository;
     }
 
     @Override
@@ -32,6 +36,13 @@ public class DataGenerator implements CommandLineRunner {
 
         payment1.setPaymentDetail(paymentDetail1);
         payment2.setPaymentDetail(paymentDetail2);
+
+        Merchant merchant1 = new Merchant("AmazonSunMerchant", "M123", new BigDecimal(0.25), new BigDecimal(3.25), 5);
+
+        payment1.setMerchant(merchant1);
+        payment2.setMerchant(merchant1);
+
+        merchantRepository.save(merchant1);
 
         paymentRepository.save(payment1);
         paymentRepository.save(payment2);

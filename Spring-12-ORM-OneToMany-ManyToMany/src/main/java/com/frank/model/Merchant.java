@@ -21,6 +21,15 @@ public class Merchant {
     private String name;
     private String code;
     private BigDecimal transactionFee;
+
+    public Merchant(String name, String code, BigDecimal transactionFee, BigDecimal commissionRate, Integer payoutDelayCount) {
+        this.name = name;
+        this.code = code;
+        this.transactionFee = transactionFee;
+        this.commissionRate = commissionRate;
+        this.payoutDelayCount = payoutDelayCount;
+    }
+
     private BigDecimal commissionRate;
     private Integer payoutDelayCount;
 
