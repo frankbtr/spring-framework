@@ -1,18 +1,14 @@
 package com.frank.bootstrap;
 
 import com.frank.enums.Status;
-import com.frank.model.Customer;
-import com.frank.model.Merchant;
-import com.frank.model.Payment;
-import com.frank.model.PaymentDetail;
-import com.frank.repository.CustomerRepository;
-import com.frank.repository.MerchantRepository;
-import com.frank.repository.PaymentRepository;
+import com.frank.model.*;
+import com.frank.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 @Component
 public class DataGenerator implements CommandLineRunner {
@@ -20,12 +16,15 @@ public class DataGenerator implements CommandLineRunner {
     private final PaymentRepository paymentRepository;
     private final MerchantRepository merchantRepository;
     private final CustomerRepository customerRepository;
+    private final ItemRepository itemRepository;
+    private final CartRepository cartRepository;
 
-
-    public DataGenerator(PaymentRepository paymentRepository, MerchantRepository merchantRepository, CustomerRepository customerRepository) {
+    public DataGenerator(PaymentRepository paymentRepository, MerchantRepository merchantRepository, CustomerRepository customerRepository, ItemRepository itemRepository, CartRepository cartRepository) {
         this.paymentRepository = paymentRepository;
         this.merchantRepository = merchantRepository;
         this.customerRepository = customerRepository;
+        this.itemRepository = itemRepository;
+        this.cartRepository = cartRepository;
     }
 
     @Override
@@ -45,6 +44,23 @@ public class DataGenerator implements CommandLineRunner {
         Merchant merchant1 = new Merchant("AmazonSunMerchant", "M123", new BigDecimal(0.25), new BigDecimal(3.25), 5);
 
         Customer customer1 = new Customer("msmith", "Mike", "Smith", "m.smith@gmail.com", "VA");
+
+        Item item1 = new Item("Milk", "M01");
+        Item item2 = new Item("Sugar", "S01");
+        Item item3 = new Item("Water", "W01");
+
+        Cart cart1 = new Cart();
+        Cart cart2 = new Cart();
+
+        itemRepository.save(item1);
+        itemRepository.save(item2);
+        itemRepository.save(item3);
+
+        cartRepository.save(cart1);
+        cartRepository.save(cart2);
+
+        cart1.setItemList(Arrays.asList(item1, item2, item3));
+        cart2.setItemList(Arrays.asList(item1, item3));
 
         payment1.setMerchant(merchant1);
         payment2.setMerchant(merchant1);
