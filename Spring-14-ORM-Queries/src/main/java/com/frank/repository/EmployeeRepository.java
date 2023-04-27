@@ -2,10 +2,14 @@ package com.frank.repository;
 
 import com.frank.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
+@Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     //Display all employees with email address
@@ -15,10 +19,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> findByFirstNameAndLastNameOrEmail(String firstName, String lastName, String email);
 
     //Display all employees that first name is not ""
-    List<Employee> findByFirstNameIsNoy(String firstName);
+    List<Employee> findByFirstNameIsNot(String firstName);
 
     //Display all employees where last name start with ""
-    List<Employee> findByLastNameStartWith(String pattern);
+    List<Employee> findByLastNameStartingWith(String pattern);
 
     //Display all employees with salaries higher than  ""
     List<Employee> findBySalaryGreaterThan(Integer salary);
@@ -36,7 +40,20 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> findDistinctTop3BySalaryLessThan(Integer salary);
 
     //Display all employees that do not have email address
-    List<Employee> findByEmailIsNull(String email);
+    List<Employee> findByEmailIsNull();
 
 
+
+    // put class name as "Employee" same as in entity package, do not put the table name
+    @Query("SELECT e FROM Employee e WHERE e.email = 'jhookd@booking.com'")
+    Employee getEmployeeDetail();
+
+    @Query("SELECT e.salary FROM Employee e WHERE e.email = 'jhookd@booking.com'")
+    Integer getEmployeeSalary();
+
+    @Query("SELECT e FROM Employee e WHERE e.email=?1")
+    Optional<Employee> getEmployeeDetail(String email);
+
+    @Query("SELECT e FROM Employee e WHERE e.email=?1 AND e.salary=?2")
+    Employee getEmployeeDetail(String email, int salary);
 }
