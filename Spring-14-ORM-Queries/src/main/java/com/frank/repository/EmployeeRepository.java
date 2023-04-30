@@ -2,9 +2,12 @@ package com.frank.repository;
 
 import com.frank.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -99,4 +102,15 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> getEmployeeSalaryOrderDesc();
 
 
+    // pure native query
+    @Query(value = "SELECT * FROM employees WHERE salary ?1", nativeQuery = true)
+    List<Employee> readEmployeeDetailBySalary(int salary);
+
+    @Query("SELECT e FROM Employee e WHERE e.salary = :salary")
+    List<Employee> getEmployeeSalary(@Param("salary") int salary);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Employee e SET e.email = 'admin@email.com' WHERE e.id=:id", nativeQuery = true)
+    void updateEmployeeJPQL(@Param("id") int id);
 }
