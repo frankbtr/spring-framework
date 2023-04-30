@@ -1,7 +1,9 @@
 package com.frank.entity;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
@@ -12,7 +14,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class MovieCinema extends BaseEntity{
 
@@ -25,4 +28,10 @@ public class MovieCinema extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     private Cinema cinema;
 
+    @Override
+    public String toString() {
+        return "MovieCinema{" +
+                "dateTime=" + dateTime +
+                '}';
+    }
 }
