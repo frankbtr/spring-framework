@@ -30,7 +30,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     //Write a derived query to list all movies with a specific state and type
     List<Movie> findAllByStateAndType(MovieState state, MovieType type);
 
-    // ------------------- JPL QUERIES ------------------- //
+    // ------------------- JPQL QUERIES ------------------- //
     //Write a derived query to list all movies between a range of prices
     @Query("SELECT m FROM Movie m WHERE m.price BETWEEN ?1 AND ?2")
     List<Movie> getByPriceBetween(@Param("price1") BigDecimal price1,@Param("price2") BigDecimal price2);
