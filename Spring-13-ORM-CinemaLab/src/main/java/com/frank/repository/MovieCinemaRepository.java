@@ -4,6 +4,7 @@ import com.frank.entity.Genre;
 import com.frank.entity.MovieCinema;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -36,14 +37,19 @@ public interface MovieCinemaRepository extends JpaRepository<MovieCinema, Long> 
 
 
     // ------------------- JPQL QUERIES ------------------- //
-
     //Write a JPQL query to list all movie cinemas with higher than a specific date
-
+    @Query("SELECT mc FROM MovieCinema mc WHERE mc.dateTime >?!")
+    List<MovieCinema> fetchAllWithHigherThanSpecificDate(@Param("dateTime") LocalDateTime dateTime);
 
 
     // ------------------- NATIVE QUERIES ------------------- //
+    //Write a native query to list all movies cinemas that contains a specific cinema id
+    @Query(value = "SELECT COUNT(*) FROM movie_cinema WHERE cinema_id - ?!", nativeQuery = true)
+    List<MovieCinema> countByCinemaId(@Param("id") Long id);
 
-    //Write a native query that returns genres by containing name
-
-
+    //Write a native query returns list all movies cinemas by location name
+    @Query(value = "SELECT * FROM movie_cinema mc JOIN cinema c " +
+            "ON mc.cinema_id = c.id JOIN location l ON c.location_id = l.id " +
+            "WHERE  l.name = ?1 ", nativeQuery = true)
+    List<MovieCinema> retrieveAllByLocationName(@Param("name") String name);
 }
