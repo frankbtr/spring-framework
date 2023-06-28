@@ -1,7 +1,7 @@
 package com.frank.converter;
 
-import com.cydeo.dto.UserDTO;
-import com.cydeo.service.UserService;
+import com.frank.dto.UserDTO;
+import com.frank.service.UserService;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.convert.converter.Converter;
